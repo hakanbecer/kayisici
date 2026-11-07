@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Kayısı Hasadı" />
+    <meta name="theme-color" content="#7ab85d" />
+    <title>Kayısı Hasadı</title>
+    <link rel="icon" type="image/png" href="./favicon.png" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- 3D WebGL Canvas Container -->
+      <div id="canvas-container"></div>
+
+      <!-- UI Overlay -->
+      <div id="ui-layer">
+        <!-- Top HUD -->
+        <header id="top-hud">
+          <div class="hud-left-group">
+            <div class="hud-card item-card">
+              <span id="hud-item-icon" class="hud-icon">🖐️</span>
+              <div class="hud-info">
+                <span id="hud-item-label" class="hud-label">BOŞ</span>
+                <span id="apricot-counter" class="hud-value">0 / 0</span>
+              </div>
+            </div>
+            <div id="full-capacity-badge" class="badge-hidden">DOLU!</div>
+          </div>
+
+          <!-- Upgrade Modal Trigger Button (min 48px touch target) -->
+          <button id="upgrade-btn" class="upgrade-hud-btn" title="Yükseltmeler" aria-label="Yükseltmeler">
+            <span class="btn-icon">⚡</span>
+            <span class="btn-text">Yükselt</span>
+          </button>
+
+          <div class="hud-right-group">
+            <button id="audio-toggle-btn" class="hud-circle-btn" title="Sesi Aç/Kapat" aria-label="Sesi Aç/Kapat">🔊</button>
+            <div class="hud-card money-card">
+              <span class="hud-icon">💰</span>
+              <div class="hud-info">
+                <span class="hud-label">KASA</span>
+                <span id="money-counter" class="hud-value">0</span>
+              </div>
+            </div>
+            <button id="dev-panel-toggle" title="Geliştirici Paneli" aria-label="Geliştirici Paneli">⚙️</button>
+          </div>
+        </header>
+
+        <!-- Tutorial Overlay -->
+        <div id="tutorial-overlay" class="tutorial-hidden">
+          <div id="tutorial-banner">
+            <div id="tutorial-step-counter" class="tutorial-badge">1/9</div>
+            <div id="tutorial-text" class="tutorial-instruction">Ağacın yanına git ve durarak kayısı topla</div>
+            <div class="tutorial-actions">
+              <button id="tutorial-skip-btn" class="tutorial-action-btn">Geç</button>
+              <button id="tutorial-close-btn" class="tutorial-action-btn tutorial-close">✕ Kapat</button>
+            </div>
+          </div>
+          <div id="tutorial-edge-pointer" class="edge-pointer-hidden">
+            <div class="edge-pointer-arrow">➤</div>
+          </div>
+        </div>
+
+        <!-- Developer Stats Panel (default closed) -->
+        <div id="dev-panel" class="dev-panel-hidden">
+          <div class="dev-panel-header">
+            <h3>⚙️ Geliştirici Paneli</h3>
+            <button id="dev-panel-close">✕</button>
+          </div>
+          <div class="dev-panel-body">
+            <div class="dev-stat-row">
+              <span class="dev-stat-label">Kare Hızı (FPS):</span>
+              <span id="dev-fps" class="dev-stat-val">60</span>
+            </div>
+            <div class="dev-stat-row">
+              <span class="dev-stat-label">Sürüm:</span>
+              <span id="dev-app-version" class="dev-stat-val">v1.0.0</span>
+            </div>
+            <div class="dev-stat-row">
+              <span class="dev-stat-label">Gelir (Son 60sn):</span>
+              <span id="dev-money-rate" class="dev-stat-val">0 💰/dk</span>
+            </div>
+            <div class="dev-stat-row">
+              <span class="dev-stat-label">Toplam Satılan Kasa:</span>
+              <span id="dev-total-crates" class="dev-stat-val">0</span>
+            </div>
+            <div class="dev-stat-row">
+              <span class="dev-stat-label">Kamyon Başı Ortalama:</span>
+              <span id="dev-avg-truck" class="dev-stat-val">0 💰</span>
+            </div>
+          </div>
+
+          <!-- Developer Test Tools (controlled by CONFIG.DEV_MODE) -->
+          <div id="dev-tools-section" class="dev-tools-section">
+            <div class="dev-section-title">🧪 Test Araçları</div>
+            <div class="dev-btn-row">
+              <button id="dev-add-1000" class="dev-tool-btn">+1000 TL</button>
+              <button id="dev-add-10000" class="dev-tool-btn">+10000 TL</button>
+            </div>
+            <div class="dev-timescale-row">
+              <span class="dev-timescale-label">Zaman Hızı:</span>
+              <div class="timescale-btn-group">
+                <button class="timescale-btn is-active" data-scale="1">x1</button>
+                <button class="timescale-btn" data-scale="3">x3</button>
+                <button class="timescale-btn" data-scale="10">x10</button>
+              </div>
+            </div>
+            <button id="dev-max-upgrades" class="dev-tool-btn dev-highlight-btn">⭐ Tüm Yükseltmeleri MAX Yap</button>
+          </div>
+
+          <div class="dev-panel-footer">
+            <button id="dev-summon-truck" class="dev-action-btn">🚚 Kamyonu Çağır</button>
+            <button id="dev-reset-save" class="dev-action-btn dev-danger-btn">⚠️ Kaydı Sıfırla</button>
+          </div>
+        </div>
+
+        <!-- Upgrade Modal Panel (default closed) -->
+        <div id="upgrade-panel" class="panel-hidden">
+          <div class="upgrade-modal-backdrop"></div>
+          <div class="upgrade-panel-modal">
+            <div class="upgrade-panel-header">
+              <h2>⚡ Geliştirmeler</h2>
+              <button id="upgrade-panel-close" class="close-btn" aria-label="Kapat">✕</button>
+            </div>
+            <div id="upgrade-list" class="upgrade-list">
+              <!-- Dynamically populated by UI.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Warning Toast for Action Denials -->
+        <div id="warning-toast" class="toast-hidden">Önce ellerini boşalt</div>
+
+        <!-- PWA New Version Update Toast -->
+        <div id="pwa-update-prompt" class="pwa-prompt-hidden">
+          <span>✨ Yeni sürüm hazır!</span>
+          <button id="pwa-reload-btn">Yenile</button>
+        </div>
+
+        <!-- PWA Add to Home Screen Banner -->
+        <div id="pwa-install-banner" class="pwa-banner-hidden">
+          <div class="pwa-banner-icon">🍑</div>
+          <div class="pwa-banner-content">
+            <div class="pwa-banner-title">Kayısı Hasadı</div>
+            <div id="pwa-banner-text" class="pwa-banner-text">Daha hızlı ve tam ekran oynamak için ana ekrana ekle</div>
+          </div>
+          <button id="pwa-install-btn" class="pwa-install-action-btn">Yükle</button>
+          <button id="pwa-dismiss-btn" class="pwa-dismiss-btn" aria-label="Kapat">✕</button>
+        </div>
+
+        <!-- Discard Action Button (visible only when holding items) -->
+        <button id="discard-btn" class="discard-btn-hidden">🗑️ At</button>
+
+        <!-- Touch Virtual Joystick -->
+        <div id="joystick-zone">
+          <div id="joystick-base">
+            <div id="joystick-knob"></div>
+          </div>
+        </div>
+
+        <!-- Desktop Controls Hint -->
+        <div id="controls-hint">
+          <span>Hareket: WASD / Yön Tuşları veya Joystick</span>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
