@@ -1,0 +1,324 @@
+{
+  "initial": {
+    "geometries": {
+      "current": 433,
+      "initial": 432,
+      "peak": 433,
+      "formatted": "433 (Baş: 432 | Tepe: 433)"
+    },
+    "textures": {
+      "current": 6,
+      "initial": 5,
+      "peak": 6,
+      "formatted": "6 (Baş: 5 | Tepe: 6)"
+    },
+    "calls": {
+      "current": 504,
+      "initial": 504,
+      "peak": 504,
+      "formatted": "504 (Baş: 504 | Tepe: 504)"
+    },
+    "triangles": {
+      "current": 8762,
+      "initial": 8762,
+      "peak": 8762,
+      "formatted": "8.762 (Baş: 8.762 | Tepe: 8.762)"
+    },
+    "sceneObjects": {
+      "current": 2011,
+      "initial": 2011,
+      "peak": 2011,
+      "formatted": "2.011 (Baş: 2.011 | Tepe: 2.011)"
+    },
+    "domNodes": {
+      "current": 140,
+      "initial": 140,
+      "peak": 140,
+      "formatted": "140 (Baş: 140 | Tepe: 140)"
+    },
+    "particles": {
+      "current": 0,
+      "initial": 0,
+      "peak": 0,
+      "formatted": "0 (Baş: 0 | Tepe: 0)"
+    },
+    "heap": {
+      "current": 11.9,
+      "initial": 21.2,
+      "peak": 25.4,
+      "formatted": "11,9 MB (Baş: 21,2 | Tepe: 25,4)"
+    },
+    "audioStats": {
+      "formatted": "Aktif: 1 (Tepe: 1) | Top: 1 [running]"
+    },
+    "fps60": {
+      "avg": 58,
+      "min": 53,
+      "formatted": "Ort: 58 | En Düşük: 53"
+    },
+    "cratesSold": 0,
+    "money": 20000,
+    "timeScale": 10
+  },
+  "final": {
+    "geometries": {
+      "current": 443,
+      "initial": 432,
+      "peak": 443,
+      "formatted": "443 (Baş: 432 | Tepe: 443)"
+    },
+    "textures": {
+      "current": 6,
+      "initial": 5,
+      "peak": 7,
+      "formatted": "6 (Baş: 5 | Tepe: 7)"
+    },
+    "calls": {
+      "current": 504,
+      "initial": 504,
+      "peak": 577,
+      "formatted": "504 (Baş: 504 | Tepe: 577)"
+    },
+    "triangles": {
+      "current": 8762,
+      "initial": 8762,
+      "peak": 11006,
+      "formatted": "8.762 (Baş: 8.762 | Tepe: 11.006)"
+    },
+    "sceneObjects": {
+      "current": 2011,
+      "initial": 2011,
+      "peak": 2101,
+      "formatted": "2.011 (Baş: 2.011 | Tepe: 2.101)"
+    },
+    "domNodes": {
+      "current": 140,
+      "initial": 140,
+      "peak": 140,
+      "formatted": "140 (Baş: 140 | Tepe: 140)"
+    },
+    "particles": {
+      "current": 0,
+      "initial": 0,
+      "peak": 5,
+      "formatted": "0 (Baş: 0 | Tepe: 5)"
+    },
+    "heap": {
+      "current": 14.9,
+      "initial": 21.2,
+      "peak": 25.4,
+      "formatted": "14,9 MB (Baş: 21,2 | Tepe: 25,4)"
+    },
+    "audioStats": {
+      "formatted": "Aktif: 1 (Tepe: 7) | Top: 785 [running]"
+    },
+    "fps60": {
+      "avg": 60,
+      "min": 58,
+      "formatted": "Ort: 60 | En Düşük: 58"
+    },
+    "cratesSold": 588,
+    "money": 55280,
+    "errCount": 0
+  },
+  "samples": [
+    {
+      "sec": 0,
+      "geometries": {
+        "current": 433,
+        "initial": 432,
+        "peak": 433,
+        "formatted": "433 (Baş: 432 | Tepe: 433)"
+      },
+      "textures": {
+        "current": 6,
+        "initial": 5,
+        "peak": 6,
+        "formatted": "6 (Baş: 5 | Tepe: 6)"
+      },
+      "calls": {
+        "current": 504,
+        "initial": 504,
+        "peak": 504,
+        "formatted": "504 (Baş: 504 | Tepe: 504)"
+      },
+      "triangles": {
+        "current": 8762,
+        "initial": 8762,
+        "peak": 8762,
+        "formatted": "8.762 (Baş: 8.762 | Tepe: 8.762)"
+      },
+      "sceneObjects": {
+        "current": 2011,
+        "initial": 2011,
+        "peak": 2011,
+        "formatted": "2.011 (Baş: 2.011 | Tepe: 2.011)"
+      },
+      "domNodes": {
+        "current": 140,
+        "initial": 140,
+        "peak": 140,
+        "formatted": "140 (Baş: 140 | Tepe: 140)"
+      },
+      "particles": {
+        "current": 0,
+        "initial": 0,
+        "peak": 0,
+        "formatted": "0 (Baş: 0 | Tepe: 0)"
+      },
+      "heap": {
+        "current": 11.9,
+        "initial": 21.2,
+        "peak": 25.4,
+        "formatted": "11,9 MB (Baş: 21,2 | Tepe: 25,4)"
+      },
+      "audioStats": {
+        "formatted": "Aktif: 1 (Tepe: 1) | Top: 1 [running]"
+      },
+      "fps60": {
+        "avg": 58,
+        "min": 53,
+        "formatted": "Ort: 58 | En Düşük: 53"
+      },
+      "cratesSold": 0,
+      "money": 20000,
+      "timeScale": 10
+    },
+    {
+      "sec": 30,
+      "geometries": 443,
+      "geomPeak": 443,
+      "textures": 6,
+      "calls": 504,
+      "sceneObjects": 2100,
+      "particles": 0,
+      "heap": 15,
+      "heapPeak": 25.4,
+      "audio": "Aktif: 5 (Tepe: 7) | Top: 75 [running]",
+      "fps60": "Ort: 59 | En Düşük: 50",
+      "cratesSold": 60,
+      "money": 23600
+    },
+    {
+      "sec": 60,
+      "geometries": 443,
+      "geomPeak": 443,
+      "textures": 6,
+      "calls": 504,
+      "sceneObjects": 2011,
+      "particles": 0,
+      "heap": 15.3,
+      "heapPeak": 25.4,
+      "audio": "Aktif: 1 (Tepe: 7) | Top: 151 [running]",
+      "fps60": "Ort: 60 | En Düşük: 49",
+      "cratesSold": 114,
+      "money": 26840
+    },
+    {
+      "sec": 90,
+      "geometries": 443,
+      "geomPeak": 443,
+      "textures": 6,
+      "calls": 504,
+      "sceneObjects": 2011,
+      "particles": 0,
+      "heap": 22.3,
+      "heapPeak": 25.4,
+      "audio": "Aktif: 1 (Tepe: 7) | Top: 235 [running]",
+      "fps60": "Ort: 60 | En Düşük: 49",
+      "cratesSold": 174,
+      "money": 30440
+    },
+    {
+      "sec": 120,
+      "geometries": 443,
+      "geomPeak": 443,
+      "textures": 6,
+      "calls": 504,
+      "sceneObjects": 2011,
+      "particles": 0,
+      "heap": 14.3,
+      "heapPeak": 25.4,
+      "audio": "Aktif: 1 (Tepe: 7) | Top: 311 [running]",
+      "fps60": "Ort: 60 | En Düşük: 56",
+      "cratesSold": 234,
+      "money": 34040
+    },
+    {
+      "sec": 150,
+      "geometries": 443,
+      "geomPeak": 443,
+      "textures": 6,
+      "calls": 504,
+      "sceneObjects": 2011,
+      "particles": 0,
+      "heap": 16.2,
+      "heapPeak": 25.4,
+      "audio": "Aktif: 1 (Tepe: 7) | Top: 381 [running]",
+      "fps60": "Ort: 60 | En Düşük: 56",
+      "cratesSold": 294,
+      "money": 37640
+    },
+    {
+      "sec": 180,
+      "geometries": 443,
+      "geomPeak": 443,
+      "textures": 6,
+      "calls": 504,
+      "sceneObjects": 2011,
+      "particles": 0,
+      "heap": 11.6,
+      "heapPeak": 25.4,
+      "audio": "Aktif: 1 (Tepe: 7) | Top: 463 [running]",
+      "fps60": "Ort: 60 | En Düşük: 38",
+      "cratesSold": 354,
+      "money": 41240
+    },
+    {
+      "sec": 210,
+      "geometries": 443,
+      "geomPeak": 443,
+      "textures": 6,
+      "calls": 504,
+      "sceneObjects": 2100,
+      "particles": 0,
+      "heap": 19.8,
+      "heapPeak": 25.4,
+      "audio": "Aktif: 5 (Tepe: 7) | Top: 545 [running]",
+      "fps60": "Ort: 60 | En Düşük: 38",
+      "cratesSold": 414,
+      "money": 44840
+    },
+    {
+      "sec": 240,
+      "geometries": 443,
+      "geomPeak": 443,
+      "textures": 6,
+      "calls": 504,
+      "sceneObjects": 2100,
+      "particles": 0,
+      "heap": 20,
+      "heapPeak": 25.4,
+      "audio": "Aktif: 5 (Tepe: 7) | Top: 627 [running]",
+      "fps60": "Ort: 60 | En Düşük: 58",
+      "cratesSold": 474,
+      "money": 48440
+    },
+    {
+      "sec": 270,
+      "geometries": 443,
+      "geomPeak": 443,
+      "textures": 6,
+      "calls": 504,
+      "sceneObjects": 2011,
+      "particles": 0,
+      "heap": 17.6,
+      "heapPeak": 25.4,
+      "audio": "Aktif: 1 (Tepe: 7) | Top: 707 [running]",
+      "fps60": "Ort: 60 | En Düşük: 58",
+      "cratesSold": 528,
+      "money": 51680
+    }
+  ],
+  "consoleErrors": []
+}

@@ -3,6 +3,9 @@ import { CONFIG } from '../config.js';
 import { createPlayer, createApricot, createCrate } from './Assets.js';
 import { state } from './State.js';
 
+// Reusable temporary vector for stack position query
+const _tempStackPos = new THREE.Vector3();
+
 export class Player {
   constructor(scene) {
     this.scene = scene;
@@ -232,7 +235,7 @@ export class Player {
   /**
    * World position of the backpack anchor for fruit fly animation target
    */
-  getStackWorldPosition(targetVec = new THREE.Vector3()) {
+  getStackWorldPosition(targetVec = _tempStackPos) {
     this.fruitAnchor.getWorldPosition(targetVec);
     return targetVec;
   }

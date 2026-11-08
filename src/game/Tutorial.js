@@ -2,6 +2,10 @@ import * as THREE from 'three';
 import { CONFIG } from '../config.js';
 import { state } from './State.js';
 
+// Module-level temporary vectors to eliminate per-frame allocations
+const _tempTutorialTarget = new THREE.Vector3();
+const _tempTutorialNdc = new THREE.Vector3();
+
 /**
  * State-driven Interactive Step-by-Step Tutorial.
  * Guides new players through the entire apricot production chain:
@@ -387,14 +391,14 @@ export class TutorialManager {
     const ringScale = 1.0 + Math.sin(this.animTime * 3.5) * 0.12;
     this.ringMesh.scale.set(ringScale, ringScale, 1.0);
 
-    // 2. Project target to NDC (-1 to 1)
-    const targetVec = new THREE.Vector3(step.target.x, step.target.y, step.target.z);
-    const ndc = targetVec.clone().project(camera);
+    // 2. Project target to NDC (-1 to 1) using reusable vectors
+    _tempTutorialTarget.set(step.target.x, step.target.y, step.target.z);
+    _tempTutorialNdc.copy(_tempTutorialTarget).project(camera);
 
     const isVisibleOnScreen =
-      ndc.x >= -0.80 && ndc.x <= 0.80 &&
-      ndc.y >= -0.78 && ndc.y <= 0.78 &&
-      ndc.z < 1.0;
+      _tempTutorialNdc.x >= -0.80 && _tempTutorialNdc.x <= 0.80 &&
+      _tempTutorialNdc.y >= -0.78 && _tempTutorialNdc.y <= 0.78 &&
+      _tempTutorialNdc.z < 1.0;
 
     if (isVisibleOnScreen) {
       // Show 3D marker in world, hide 2D edge indicator
@@ -414,7 +418,7 @@ export class TutorialManager {
         const halfW = winW / 2;
         const halfH = winH / 2;
 
-        const angle = Math.atan2(ndc.y, ndc.x);
+        const angle = Math.atan2(_tempTutorialNdc.y, _tempTutorialNdc.x);
 
         const padX = 36;
         const padY = 56;
@@ -425,11 +429,11 @@ export class TutorialManager {
         const slope = Math.tan(angle);
 
         if (Math.abs(Math.cos(angle)) * boundH > Math.abs(Math.sin(angle)) * boundW) {
-          const signX = ndc.x > 0 ? 1 : -1;
+          const signX = _tempTutorialNdc.x > 0 ? 1 : -1;
           screenX = halfW + signX * boundW;
           screenY = halfH - signX * boundW * slope;
         } else {
-          const signY = ndc.y > 0 ? 1 : -1;
+          const signY = _tempTutorialNdc.y > 0 ? 1 : -1;
           screenY = halfH - signY * boundH;
           screenX = halfW + (signY * boundH) / (slope || 0.0001);
         }

@@ -11,8 +11,8 @@
     <link rel="icon" type="image/png" href="./favicon.png" />
     <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
     <link rel="manifest" href="./manifest.webmanifest" />
-    <script type="module" crossorigin src="/assets/index-0eIyy_kr.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BX9nL_sl.css">
+    <script type="module" crossorigin src="/assets/index-zW7FcYG0.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BX7FlDl1.css">
   <link rel="manifest" href="/manifest.webmanifest"></head>
   <body>
     <div id="app">
@@ -28,7 +28,7 @@
               <span id="hud-item-icon" class="hud-icon">🖐️</span>
               <div class="hud-info">
                 <span id="hud-item-label" class="hud-label">BOŞ</span>
-                <span id="apricot-counter" class="hud-value">0 / 0</span>
+                <span id="apricot-counter" class="hud-value">0/0</span>
               </div>
             </div>
             <div id="full-capacity-badge" class="badge-hidden">DOLU!</div>
@@ -95,6 +95,49 @@
               <span class="dev-stat-label">Kamyon Başı Ortalama:</span>
               <span id="dev-avg-truck" class="dev-stat-val">0 💰</span>
             </div>
+
+            <!-- Memory & Render Metrics (Initial & 10-min Peak) -->
+            <div class="dev-section-title" style="margin-top: 10px;">📊 Bellek & Render (10 dk Tepe)</div>
+            <div class="dev-stat-row">
+              <span class="dev-stat-label">Geometriler:</span>
+              <span id="dev-metric-geometries" class="dev-stat-val">-</span>
+            </div>
+            <div class="dev-stat-row">
+              <span class="dev-stat-label">Dokular (Textures):</span>
+              <span id="dev-metric-textures" class="dev-stat-val">-</span>
+            </div>
+            <div class="dev-stat-row">
+              <span class="dev-stat-label">Draw Calls:</span>
+              <span id="dev-metric-calls" class="dev-stat-val">-</span>
+            </div>
+            <div class="dev-stat-row">
+              <span class="dev-stat-label">Üçgenler (Triangles):</span>
+              <span id="dev-metric-triangles" class="dev-stat-val">-</span>
+            </div>
+            <div class="dev-stat-row">
+              <span class="dev-stat-label">Sahne Nesneleri:</span>
+              <span id="dev-metric-scene-objects" class="dev-stat-val">-</span>
+            </div>
+            <div class="dev-stat-row">
+              <span class="dev-stat-label">DOM Elemanları:</span>
+              <span id="dev-metric-dom-nodes" class="dev-stat-val">-</span>
+            </div>
+            <div class="dev-stat-row">
+              <span class="dev-stat-label">Aktif Parçacık:</span>
+              <span id="dev-metric-particles" class="dev-stat-val">-</span>
+            </div>
+            <div class="dev-stat-row">
+              <span class="dev-stat-label">JS Heap:</span>
+              <span id="dev-metric-heap" class="dev-stat-val">-</span>
+            </div>
+            <div class="dev-stat-row">
+              <span class="dev-stat-label">WebAudio:</span>
+              <span id="dev-metric-audio" class="dev-stat-val">-</span>
+            </div>
+            <div class="dev-stat-row">
+              <span class="dev-stat-label">60sn FPS (Ort/Min):</span>
+              <span id="dev-metric-fps60" class="dev-stat-val">-</span>
+            </div>
           </div>
 
           <!-- Developer Test Tools (controlled by CONFIG.DEV_MODE) -->
@@ -116,6 +159,7 @@
           </div>
 
           <div class="dev-panel-footer">
+            <button id="dev-copy-errlog" class="dev-action-btn">📋 Hata Kaydını Kopyala (<span id="dev-err-count">0</span>)</button>
             <button id="dev-summon-truck" class="dev-action-btn">🚚 Kamyonu Çağır</button>
             <button id="dev-reset-save" class="dev-action-btn dev-danger-btn">⚠️ Kaydı Sıfırla</button>
           </div>

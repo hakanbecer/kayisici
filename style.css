@@ -523,17 +523,32 @@ html, body {
   transform: scale(0.96);
 }
 
-@media (max-width: 420px) {
+@media (max-width: 440px) {
   #top-hud {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 6px;
     gap: 4px;
-    left: 6px;
-    right: 6px;
+    left: 8px;
+    right: 8px;
   }
-  .hud-left-group, .hud-right-group {
+  .hud-left-group {
+    order: 1;
     gap: 4px;
+  }
+  .hud-right-group {
+    order: 2;
+    gap: 4px;
+  }
+  .upgrade-hud-btn {
+    order: 3;
+    width: 100%;
+    min-height: 44px;
+    justify-content: center;
+    margin-top: 2px;
   }
   .hud-card {
-    padding: 6px 8px;
+    padding: 6px 10px;
     gap: 4px;
     border-radius: 16px;
   }
@@ -542,18 +557,13 @@ html, body {
   }
   .hud-value {
     font-size: 14px;
+    white-space: nowrap;
   }
   .hud-icon {
     font-size: 18px;
   }
-  .upgrade-hud-btn {
-    min-height: 44px;
-    min-width: 44px;
-    padding: 6px 10px;
-    gap: 4px;
-  }
   .upgrade-hud-btn .btn-text {
-    font-size: 12px;
+    font-size: 13px;
   }
   #dev-panel-toggle, .hud-circle-btn {
     width: 38px;
@@ -795,6 +805,11 @@ html, body {
   font-weight: 900;
   color: #3b2a1a;
   letter-spacing: -0.2px;
+  white-space: nowrap;
+}
+
+#apricot-counter {
+  white-space: nowrap;
 }
 
 /* Full Capacity Badge */
@@ -1095,6 +1110,7 @@ html, body {
     left: max(16px, env(safe-area-inset-left));
     right: max(16px, env(safe-area-inset-right));
     gap: 6px;
+    flex-wrap: nowrap;
   }
   .hud-card {
     padding: 4px 10px;

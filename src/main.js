@@ -9,6 +9,8 @@ import { events } from './game/Events.js';
 import { audio } from './game/Audio.js';
 import { ParticleSystem } from './game/Particles.js';
 import { TutorialManager } from './game/Tutorial.js';
+import { errorLogger } from './game/ErrorLogger.js';
+import { metricsTracker } from './game/MetricsTracker.js';
 import { initPWA } from './pwa.js';
 
 function init() {
@@ -25,6 +27,13 @@ function init() {
   const input = new Input();
   const particles = new ParticleSystem(world.scene);
   const tutorial = new TutorialManager(world.scene, { world, player, state });
+
+  // WebGL context monitoring & error logging
+  errorLogger.attachWebGLContext(world.renderer.domElement);
+  errorLogger.setProviders({
+    getFPS: () => currentFps,
+    getTimeScale: () => timeScale
+  });
 
   // Upgrade particle burst listener
   events.on('upgrade_bought', () => {
@@ -100,10 +109,23 @@ function init() {
 
   // 2. Main game loop
   function animate() {
+    if (errorLogger.isContextLost) {
+      return; // WebGL context lost; halt render loop
+    }
+
     requestAnimationFrame(animate);
 
     // Guard against huge dt spike on tab background (max 0.1s delta)
     const dt = Math.min(clock.getDelta(), 0.1);
+
+    // Sample performance, memory and scene metrics
+    metricsTracker.update({
+      renderer: world.renderer,
+      scene: world.scene,
+      particles,
+      audio,
+      fps: currentFps
+    });
 
     // Measure FPS (1-second window)
     frameCount++;
@@ -181,6 +203,8 @@ function init() {
     stations: world.stations,
     salesStand: world.salesStand,
     salesDepot: world.salesStand,
+    errorLogger,
+    metricsTracker,
     handleDiscard,
     getFPS: () => currentFps,
     getRenderSkippedCount: () => renderSkippedCount,

@@ -15,6 +15,18 @@ import { SalesStand } from './SalesStand.js';
 import { state } from './State.js';
 import { events } from './Events.js';
 
+// Module-level temporary vector to avoid per-frame GC allocations
+const _tempFruitTarget = new THREE.Vector3();
+
+function getOptimalPixelRatio() {
+  const dpr = window.devicePixelRatio || 1;
+  const isLowMemory =
+    (navigator.deviceMemory && navigator.deviceMemory <= 4) ||
+    (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
+  const maxRatio = isLowMemory ? 1.0 : 1.5;
+  return Math.min(dpr, maxRatio);
+}
+
 export class World {
   /**
    * @param {HTMLElement} container
@@ -47,10 +59,16 @@ export class World {
     this.cameraOffset = new THREE.Vector3(camX, camY, camZ);
     this.cameraTarget = new THREE.Vector3(0, 0, 0);
 
-    // 3. Renderer
-    this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    // 3. Renderer (Cheap mobile safeguards: antialias off on mobile, pixelRatio capped at 1.5, or 1.0 on low-memory)
+    const isMobile =
+      /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) ||
+      (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) ||
+      window.innerWidth < 768;
+    const antialias = !isMobile;
+
+    this.renderer = new THREE.WebGLRenderer({ antialias, alpha: false });
     this.renderer.setSize(container.clientWidth, container.clientHeight);
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    this.renderer.setPixelRatio(getOptimalPixelRatio());
     this.renderer.shadowMap.enabled = false;
     container.appendChild(this.renderer.domElement);
 
@@ -426,8 +444,6 @@ export class World {
   }
 
   _updateFlyingFruits(dt, player) {
-    const targetPos = new THREE.Vector3();
-
     for (let i = this.flyingFruits.length - 1; i >= 0; i--) {
       const item = this.flyingFruits[i];
 
@@ -437,7 +453,7 @@ export class World {
       }
 
       item.progress += dt / item.duration;
-      player.getStackWorldPosition(targetPos);
+      player.getStackWorldPosition(_tempFruitTarget);
 
       if (item.progress >= 1.0) {
         this.scene.remove(item.mesh);
@@ -446,7 +462,7 @@ export class World {
         this.flyingFruits.splice(i, 1);
       } else {
         const p = item.progress;
-        item.mesh.position.lerpVectors(item.startPos, targetPos, p);
+        item.mesh.position.lerpVectors(item.startPos, _tempFruitTarget, p);
         const arc = Math.sin(p * Math.PI) * item.arcHeight;
         item.mesh.position.y += arc;
         item.mesh.rotation.x += dt * 8.0;
@@ -487,7 +503,7 @@ export class World {
     this.camera.bottom = -halfH;
     this.camera.updateProjectionMatrix();
 
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    this.renderer.setPixelRatio(getOptimalPixelRatio());
     this.renderer.setSize(width, height);
   }
 

@@ -95,6 +95,14 @@ export class ParticleSystem {
     return this.activePoolLimit;
   }
 
+  getActiveCount() {
+    let count = 0;
+    for (let i = 0; i < this.activePoolLimit; i++) {
+      if (this.particles[i].active) count++;
+    }
+    return count;
+  }
+
   /**
    * Spawns a burst of particles from the pool.
    */
@@ -112,7 +120,13 @@ export class ParticleSystem {
     baseVy = 2.0
   }) {
     let spawned = 0;
-    const targetCount = this.quality === 'low' ? Math.max(1, Math.round(count * 0.5)) : count;
+    let targetCount = this.quality === 'low' ? Math.max(1, Math.round(count * 0.5)) : count;
+
+    // Halve particle visual density at x3 or higher speed to prevent GPU/CPU saturation
+    const isHighSpeed = window.__GAME__ && window.__GAME__.getTimeScale && window.__GAME__.getTimeScale() >= 3;
+    if (isHighSpeed) {
+      targetCount = Math.max(1, Math.round(targetCount * 0.5));
+    }
 
     for (let i = 0; i < this.activePoolLimit; i++) {
       if (spawned >= targetCount) break;

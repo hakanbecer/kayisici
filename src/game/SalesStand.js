@@ -11,6 +11,9 @@ import {
 import { state } from './State.js';
 import { events } from './Events.js';
 
+// Module-level temporary vector to avoid per-frame GC allocations
+const _tempCrateTarget = new THREE.Vector3();
+
 /**
  * SalesStand and MerchantTruck Manager.
  * Manages the final stage of the apricot tycoon chain:
@@ -288,9 +291,10 @@ export class SalesStand {
     if (this.flyingCrates.length === 0) return;
 
     const truckAnchor = this.truckGroup ? this.truckGroup.userData.crateBedAnchor : null;
-    const targetPos = new THREE.Vector3();
     if (truckAnchor) {
-      truckAnchor.getWorldPosition(targetPos);
+      truckAnchor.getWorldPosition(_tempCrateTarget);
+    } else {
+      _tempCrateTarget.set(0, 0, 0);
     }
 
     for (let i = this.flyingCrates.length - 1; i >= 0; i--) {
@@ -327,7 +331,7 @@ export class SalesStand {
         }
       } else {
         const p = item.progress;
-        item.mesh.position.lerpVectors(item.startPos, targetPos, p);
+        item.mesh.position.lerpVectors(item.startPos, _tempCrateTarget, p);
         const arc = Math.sin(p * Math.PI) * item.arcHeight;
         item.mesh.position.y += arc;
         item.mesh.rotation.y += dt * 6.0;
@@ -355,6 +359,15 @@ export class SalesStand {
   }
 
   _spawnNotice(text, color) {
+    // Halve floating notice generation at x3 or higher speed (visual only, earnings logic unaffected)
+    const isHighSpeed = window.__GAME__ && window.__GAME__.getTimeScale && window.__GAME__.getTimeScale() >= 3;
+    if (isHighSpeed) {
+      this.noticeSkipCounter = (this.noticeSkipCounter || 0) + 1;
+      if (this.noticeSkipCounter % 2 !== 0) {
+        return;
+      }
+    }
+
     const notice = createFloatingNotice(text, color);
     const originZ = this.truckGroup ? this.truckGroup.position.z : 0;
     notice.position.set(this.truckConfig.ROAD_X, 2.8, originZ);
@@ -375,6 +388,11 @@ export class SalesStand {
 
       if (notice.userData.life >= notice.userData.maxLife) {
         this.scene.remove(notice);
+        // Note: notice.geometry is cachedNoticePlaneGeo, do NOT dispose it!
+        if (notice.material) {
+          if (notice.material.map) notice.material.map.dispose();
+          notice.material.dispose();
+        }
         this.floatingNotices.splice(i, 1);
       }
     }

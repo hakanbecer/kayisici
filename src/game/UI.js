@@ -1,5 +1,7 @@
 import { CONFIG } from '../config.js';
 import { events } from './Events.js';
+import { errorLogger } from './ErrorLogger.js';
+import { metricsTracker } from './MetricsTracker.js';
 
 export class UI {
   constructor() {
@@ -25,6 +27,31 @@ export class UI {
     this.devAppVersionEl = document.getElementById('dev-app-version');
     if (this.devAppVersionEl && CONFIG.APP_VERSION) {
       this.devAppVersionEl.textContent = `v${CONFIG.APP_VERSION}`;
+    }
+
+    // System & Memory Metrics elements (Dev Panel)
+    this.devMetricGeometriesEl = document.getElementById('dev-metric-geometries');
+    this.devMetricTexturesEl = document.getElementById('dev-metric-textures');
+    this.devMetricCallsEl = document.getElementById('dev-metric-calls');
+    this.devMetricTrianglesEl = document.getElementById('dev-metric-triangles');
+    this.devMetricSceneObjectsEl = document.getElementById('dev-metric-scene-objects');
+    this.devMetricDomNodesEl = document.getElementById('dev-metric-dom-nodes');
+    this.devMetricParticlesEl = document.getElementById('dev-metric-particles');
+    this.devMetricHeapEl = document.getElementById('dev-metric-heap');
+    this.devMetricAudioEl = document.getElementById('dev-metric-audio');
+    this.devMetricFps60El = document.getElementById('dev-metric-fps60');
+    this.devCopyErrlogBtn = document.getElementById('dev-copy-errlog');
+    this.devErrCountEl = document.getElementById('dev-err-count');
+
+    if (this.devCopyErrlogBtn) {
+      this.devCopyErrlogBtn.addEventListener('click', async () => {
+        const count = await errorLogger.copyLogsToClipboard();
+        const origContent = this.devCopyErrlogBtn.innerHTML;
+        this.devCopyErrlogBtn.textContent = `✅ Kopyalandı! (${count} hata)`;
+        setTimeout(() => {
+          this.devCopyErrlogBtn.innerHTML = origContent;
+        }, 2000);
+      });
     }
 
     // PWA Install Banner elements
@@ -581,9 +608,9 @@ export class UI {
       this.lastCapacity = capacity;
       if (this.counterEl) {
         if (!currentType) {
-          this.counterEl.textContent = '0 / 0';
+          this.counterEl.textContent = '0/0';
         } else {
-          this.counterEl.textContent = `${count} / ${capacity}`;
+          this.counterEl.textContent = `${count}/${capacity}`;
         }
       }
     }
@@ -632,6 +659,22 @@ export class UI {
       if (this.devAvgTruckEl) {
         this.devAvgTruckEl.textContent = `${gameState.getAveragePerTruck()} 💰`;
       }
+      if (this.devErrCountEl) {
+        this.devErrCountEl.textContent = errorLogger.getLogCount().toString();
+      }
+
+      // Memory & render metrics (live, initial, 10-min peak)
+      const snapshot = metricsTracker.getSnapshot();
+      if (this.devMetricGeometriesEl) this.devMetricGeometriesEl.textContent = snapshot.geometries.formatted;
+      if (this.devMetricTexturesEl) this.devMetricTexturesEl.textContent = snapshot.textures.formatted;
+      if (this.devMetricCallsEl) this.devMetricCallsEl.textContent = snapshot.calls.formatted;
+      if (this.devMetricTrianglesEl) this.devMetricTrianglesEl.textContent = snapshot.triangles.formatted;
+      if (this.devMetricSceneObjectsEl) this.devMetricSceneObjectsEl.textContent = snapshot.sceneObjects.formatted;
+      if (this.devMetricDomNodesEl) this.devMetricDomNodesEl.textContent = snapshot.domNodes.formatted;
+      if (this.devMetricParticlesEl) this.devMetricParticlesEl.textContent = snapshot.particles.formatted;
+      if (this.devMetricHeapEl && snapshot.heap) this.devMetricHeapEl.textContent = snapshot.heap.formatted;
+      if (this.devMetricAudioEl && snapshot.audioStats) this.devMetricAudioEl.textContent = snapshot.audioStats.formatted;
+      if (this.devMetricFps60El && snapshot.fps60) this.devMetricFps60El.textContent = snapshot.fps60.formatted;
     }
 
     // 7. Update Upgrade Panel (if open)

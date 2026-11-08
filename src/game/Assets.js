@@ -45,6 +45,13 @@ const materials = {
   checkGreen: new THREE.MeshBasicMaterial({ color: CONFIG.COLORS.CHECK_GREEN })
 };
 
+// Module-level cached geometries for Apricots
+const cachedApricotGeos = {
+  body: new THREE.SphereGeometry(CONFIG.APRICOT.RADIUS, CONFIG.APRICOT.WIDTH_SEGMENTS, CONFIG.APRICOT.HEIGHT_SEGMENTS),
+  stem: new THREE.CylinderGeometry(CONFIG.APRICOT.STEM_RADIUS, CONFIG.APRICOT.STEM_RADIUS, CONFIG.APRICOT.STEM_HEIGHT, 4),
+  leaf: new THREE.BoxGeometry(CONFIG.APRICOT.LEAF_WIDTH, CONFIG.APRICOT.LEAF_HEIGHT, CONFIG.APRICOT.LEAF_DEPTH)
+};
+
 /**
  * Creates a low-poly Apricot fruit group.
  * Pivot at bottom center (Y = 0).
@@ -56,24 +63,30 @@ export function createApricot(isDry = false) {
   group.name = 'Apricot';
 
   const cfg = CONFIG.APRICOT;
-  const bodyGeo = new THREE.SphereGeometry(cfg.RADIUS, cfg.WIDTH_SEGMENTS, cfg.HEIGHT_SEGMENTS);
-  const bodyMesh = new THREE.Mesh(bodyGeo, isDry ? materials.apricotDry1 : materials.apricotFresh);
+  const bodyMesh = new THREE.Mesh(cachedApricotGeos.body, isDry ? materials.apricotDry1 : materials.apricotFresh);
   bodyMesh.position.y = cfg.RADIUS;
   group.add(bodyMesh);
 
-  const stemGeo = new THREE.CylinderGeometry(cfg.STEM_RADIUS, cfg.STEM_RADIUS, cfg.STEM_HEIGHT, 4);
-  const stemMesh = new THREE.Mesh(stemGeo, materials.treeTrunk);
+  const stemMesh = new THREE.Mesh(cachedApricotGeos.stem, materials.treeTrunk);
   stemMesh.position.y = cfg.RADIUS * 2 + cfg.STEM_HEIGHT / 2 - 0.02;
   group.add(stemMesh);
 
-  const leafGeo = new THREE.BoxGeometry(cfg.LEAF_WIDTH, cfg.LEAF_HEIGHT, cfg.LEAF_DEPTH);
-  const leafMesh = new THREE.Mesh(leafGeo, materials.apricotLeaf);
+  const leafMesh = new THREE.Mesh(cachedApricotGeos.leaf, materials.apricotLeaf);
   leafMesh.position.set(cfg.LEAF_WIDTH / 2, cfg.RADIUS * 2 + 0.01, 0);
   leafMesh.rotation.z = 0.3;
   group.add(leafMesh);
 
   return group;
 }
+
+// Module-level cached geometries for Crates
+const crateWallH = CONFIG.PROPS.CRATE.HEIGHT - 0.04;
+const cachedCrateGeos = {
+  bottom: new THREE.BoxGeometry(CONFIG.PROPS.CRATE.WIDTH, 0.04, CONFIG.PROPS.CRATE.DEPTH),
+  longWall: new THREE.BoxGeometry(CONFIG.PROPS.CRATE.WIDTH, crateWallH, CONFIG.PROPS.CRATE.WALL_THICKNESS),
+  shortWall: new THREE.BoxGeometry(CONFIG.PROPS.CRATE.WALL_THICKNESS, crateWallH, CONFIG.PROPS.CRATE.DEPTH - CONFIG.PROPS.CRATE.WALL_THICKNESS * 2),
+  fruit: new THREE.SphereGeometry(0.08, 6, 5)
+};
 
 /**
  * Creates a Crate containing apricots (Fresh, Dry1, Sulfur, or Dry2).
@@ -87,26 +100,22 @@ export function createCrate(type = CONFIG.ITEMS.CRATE_FRESH) {
   const cfg = CONFIG.PROPS.CRATE;
 
   // Outer wooden box bottom
-  const bottomGeo = new THREE.BoxGeometry(cfg.WIDTH, 0.04, cfg.DEPTH);
-  const bottomMesh = new THREE.Mesh(bottomGeo, materials.crateSlat);
+  const bottomMesh = new THREE.Mesh(cachedCrateGeos.bottom, materials.crateSlat);
   bottomMesh.position.y = 0.02;
   group.add(bottomMesh);
 
   // Side walls
-  const wallH = cfg.HEIGHT - 0.04;
-  const longWallGeo = new THREE.BoxGeometry(cfg.WIDTH, wallH, cfg.WALL_THICKNESS);
-  const shortWallGeo = new THREE.BoxGeometry(cfg.WALL_THICKNESS, wallH, cfg.DEPTH - cfg.WALL_THICKNESS * 2);
-
-  const frontWall = new THREE.Mesh(longWallGeo, materials.crate);
+  const wallH = crateWallH;
+  const frontWall = new THREE.Mesh(cachedCrateGeos.longWall, materials.crate);
   frontWall.position.set(0, wallH / 2 + 0.04, cfg.DEPTH / 2 - cfg.WALL_THICKNESS / 2);
 
-  const backWall = new THREE.Mesh(longWallGeo, materials.crate);
+  const backWall = new THREE.Mesh(cachedCrateGeos.longWall, materials.crate);
   backWall.position.set(0, wallH / 2 + 0.04, -cfg.DEPTH / 2 + cfg.WALL_THICKNESS / 2);
 
-  const leftWall = new THREE.Mesh(shortWallGeo, materials.crate);
+  const leftWall = new THREE.Mesh(cachedCrateGeos.shortWall, materials.crate);
   leftWall.position.set(-cfg.WIDTH / 2 + cfg.WALL_THICKNESS / 2, wallH / 2 + 0.04, 0);
 
-  const rightWall = new THREE.Mesh(shortWallGeo, materials.crate);
+  const rightWall = new THREE.Mesh(cachedCrateGeos.shortWall, materials.crate);
   rightWall.position.set(cfg.WIDTH / 2 - cfg.WALL_THICKNESS / 2, wallH / 2 + 0.04, 0);
 
   group.add(frontWall, backWall, leftWall, rightWall);
@@ -121,7 +130,6 @@ export function createCrate(type = CONFIG.ITEMS.CRATE_FRESH) {
     fruitMat = materials.apricotDry2;
   }
 
-  const fruitGeo = new THREE.SphereGeometry(0.08, 6, 5);
   const fruitRows = 2;
   const fruitCols = 3;
   const spacingX = 0.16;
@@ -129,7 +137,7 @@ export function createCrate(type = CONFIG.ITEMS.CRATE_FRESH) {
 
   for (let r = 0; r < fruitRows; r++) {
     for (let c = 0; c < fruitCols; c++) {
-      const f = new THREE.Mesh(fruitGeo, fruitMat);
+      const f = new THREE.Mesh(cachedCrateGeos.fruit, fruitMat);
       const fx = (c - (fruitCols - 1) / 2) * spacingX;
       const fz = (r - (fruitRows - 1) / 2) * spacingZ;
       f.position.set(fx, 0.14, fz);
@@ -730,79 +738,100 @@ export function createBorderSegment(width, height, depth) {
  * Pivot at bottom center (Y = 0).
  * @returns {THREE.Group}
  */
+// Module-level cached geometries and materials for Merchant Truck
+const truckWheelR = 0.36;
+const truckWheelW = 0.28;
+const truckBedW = 2.1;
+const truckBedL = 3.2;
+const truckBedH = 0.7;
+const truckCabinW = 1.9;
+const truckCabinH = 1.5;
+const truckCabinL = 1.5;
+
+const cachedTruckWheelGeo = new THREE.CylinderGeometry(truckWheelR, truckWheelR, truckWheelW, 12);
+cachedTruckWheelGeo.rotateZ(Math.PI / 2);
+
+const cachedTruckGeos = {
+  bedFloor: new THREE.BoxGeometry(truckBedW, 0.12, truckBedL),
+  railSide: new THREE.BoxGeometry(0.08, truckBedH, truckBedL),
+  backRail: new THREE.BoxGeometry(truckBedW, truckBedH, 0.08),
+  cabin: new THREE.BoxGeometry(truckCabinW, truckCabinH, truckCabinL),
+  glass: new THREE.BoxGeometry(truckCabinW - 0.2, 0.6, 0.04),
+  bumper: new THREE.BoxGeometry(truckCabinW + 0.1, 0.35, 0.2),
+  light: new THREE.BoxGeometry(0.24, 0.18, 0.04),
+  wheel: cachedTruckWheelGeo
+};
+
+const cachedTruckMats = {
+  glass: new THREE.MeshLambertMaterial({ color: 0x2f3542, flatShading: true }),
+  light: new THREE.MeshBasicMaterial({ color: 0xf1c40f })
+};
+
+/**
+ * Creates the Merchant Truck model with cabin, flatbed, 6 wheels, and headlights.
+ * Uses module-level cached geometries and materials so zero GPU geometry allocations occur per truck arrival.
+ * Pivot at bottom center (Y = 0).
+ * @returns {THREE.Group}
+ */
 export function createTruck() {
   const group = new THREE.Group();
   group.name = 'MerchantTruck';
 
-  const wheelR = 0.36;
-  const wheelW = 0.28;
-  const bedW = 2.1;
-  const bedL = 3.2;
-  const bedH = 0.7;
+  const wheelR = truckWheelR;
+  const bedW = truckBedW;
+  const bedL = truckBedL;
+  const bedH = truckBedH;
+  const cabinH = truckCabinH;
+  const cabinL = truckCabinL;
 
   // Cargo Bed (Flatbed)
-  const bedFloorGeo = new THREE.BoxGeometry(bedW, 0.12, bedL);
-  const bedFloor = new THREE.Mesh(bedFloorGeo, materials.truckBed);
+  const bedFloor = new THREE.Mesh(cachedTruckGeos.bedFloor, materials.truckBed);
   bedFloor.position.set(0, wheelR * 2 + 0.06, -0.4);
   group.add(bedFloor);
 
   // Bed side railings
-  const railSideGeo = new THREE.BoxGeometry(0.08, bedH, bedL);
-  const leftRail = new THREE.Mesh(railSideGeo, materials.truckBed);
+  const leftRail = new THREE.Mesh(cachedTruckGeos.railSide, materials.truckBed);
   leftRail.position.set(-bedW / 2 + 0.04, wheelR * 2 + bedH / 2, -0.4);
-  const rightRail = new THREE.Mesh(railSideGeo, materials.truckBed);
+  const rightRail = new THREE.Mesh(cachedTruckGeos.railSide, materials.truckBed);
   rightRail.position.set(bedW / 2 - 0.04, wheelR * 2 + bedH / 2, -0.4);
-  const backRailGeo = new THREE.BoxGeometry(bedW, bedH, 0.08);
-  const backRail = new THREE.Mesh(backRailGeo, materials.truckBed);
+  const backRail = new THREE.Mesh(cachedTruckGeos.backRail, materials.truckBed);
   backRail.position.set(0, wheelR * 2 + bedH / 2, -0.4 - bedL / 2 + 0.04);
   group.add(leftRail, rightRail, backRail);
 
   // Cabin (Front)
-  const cabinW = 1.9;
-  const cabinH = 1.5;
-  const cabinL = 1.5;
-  const cabinGeo = new THREE.BoxGeometry(cabinW, cabinH, cabinL);
-  const cabin = new THREE.Mesh(cabinGeo, materials.truckCabin);
+  const cabin = new THREE.Mesh(cachedTruckGeos.cabin, materials.truckCabin);
   cabin.position.set(0, wheelR * 2 + cabinH / 2, 1.35);
   group.add(cabin);
 
   // Windshield
-  const glassGeo = new THREE.BoxGeometry(cabinW - 0.2, 0.6, 0.04);
-  const glassMat = new THREE.MeshLambertMaterial({ color: 0x2f3542, flatShading: true });
-  const windshield = new THREE.Mesh(glassGeo, glassMat);
+  const windshield = new THREE.Mesh(cachedTruckGeos.glass, cachedTruckMats.glass);
   windshield.position.set(0, wheelR * 2 + cabinH * 0.65, 1.35 + cabinL / 2 + 0.01);
   group.add(windshield);
 
   // Front bumper & grille
-  const bumperGeo = new THREE.BoxGeometry(cabinW + 0.1, 0.35, 0.2);
-  const bumper = new THREE.Mesh(bumperGeo, materials.truckBumper);
+  const bumper = new THREE.Mesh(cachedTruckGeos.bumper, materials.truckBumper);
   bumper.position.set(0, wheelR + 0.1, 1.35 + cabinL / 2 + 0.1);
   group.add(bumper);
 
   // Headlights (2 small yellow boxes)
-  const lightGeo = new THREE.BoxGeometry(0.24, 0.18, 0.04);
-  const lightMat = new THREE.MeshBasicMaterial({ color: 0xf1c40f });
-  const leftLight = new THREE.Mesh(lightGeo, lightMat);
+  const leftLight = new THREE.Mesh(cachedTruckGeos.light, cachedTruckMats.light);
   leftLight.position.set(-0.6, wheelR + 0.15, 1.35 + cabinL / 2 + 0.21);
-  const rightLight = new THREE.Mesh(lightGeo, lightMat);
+  const rightLight = new THREE.Mesh(cachedTruckGeos.light, cachedTruckMats.light);
   rightLight.position.set(0.6, wheelR + 0.15, 1.35 + cabinL / 2 + 0.21);
   group.add(leftLight, rightLight);
 
   // 6 Wheels (2 front, 4 rear)
-  const wheelGeo = new THREE.CylinderGeometry(wheelR, wheelR, wheelW, 12);
-  wheelGeo.rotateZ(Math.PI / 2);
-
   const wheelPositions = [
-    [-bedW / 2 - wheelW / 2, wheelR, 1.35],
-    [bedW / 2 + wheelW / 2, wheelR, 1.35],
-    [-bedW / 2 - wheelW / 2, wheelR, -0.1],
-    [bedW / 2 + wheelW / 2, wheelR, -0.1],
-    [-bedW / 2 - wheelW / 2, wheelR, -1.3],
-    [bedW / 2 + wheelW / 2, wheelR, -1.3]
+    [-bedW / 2 - truckWheelW / 2, wheelR, 1.35],
+    [bedW / 2 + truckWheelW / 2, wheelR, 1.35],
+    [-bedW / 2 - truckWheelW / 2, wheelR, -0.1],
+    [bedW / 2 + truckWheelW / 2, wheelR, -0.1],
+    [-bedW / 2 - truckWheelW / 2, wheelR, -1.3],
+    [bedW / 2 + truckWheelW / 2, wheelR, -1.3]
   ];
 
   wheelPositions.forEach(([x, y, z]) => {
-    const wheel = new THREE.Mesh(wheelGeo, materials.truckWheel);
+    const wheel = new THREE.Mesh(cachedTruckGeos.wheel, materials.truckWheel);
     wheel.position.set(x, y, z);
     group.add(wheel);
   });
@@ -973,6 +1002,9 @@ export function createSalesBillboard() {
   return mesh;
 }
 
+// Cached plane geometry for floating notices
+const cachedNoticePlaneGeo = new THREE.PlaneGeometry(1.6, 0.48);
+
 /**
  * Creates a floating text banner that floats up and fades (e.g. "+240 💰" or "Mal yok").
  * @param {string} text
@@ -997,14 +1029,13 @@ export function createFloatingNotice(text, color = '#2ed573') {
   const texture = new THREE.CanvasTexture(canvas);
   texture.minFilter = THREE.LinearFilter;
 
-  const geo = new THREE.PlaneGeometry(1.6, 0.48);
   const mat = new THREE.MeshBasicMaterial({
     map: texture,
     transparent: true,
     depthWrite: false
   });
 
-  const mesh = new THREE.Mesh(geo, mat);
+  const mesh = new THREE.Mesh(cachedNoticePlaneGeo, mat);
   mesh.name = `FloatingNotice_${text}`;
   mesh.userData = {
     life: 0,

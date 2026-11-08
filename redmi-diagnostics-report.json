@@ -1,0 +1,616 @@
+{
+  "initialSnapshot": {
+    "geometries": {
+      "current": 252,
+      "initial": 252,
+      "peak": 252,
+      "formatted": "252 (Baş: 252 | Tepe: 252)"
+    },
+    "textures": {
+      "current": 3,
+      "initial": 3,
+      "peak": 3,
+      "formatted": "3 (Baş: 3 | Tepe: 3)"
+    },
+    "calls": {
+      "current": 273,
+      "initial": 273,
+      "peak": 273,
+      "formatted": "273 (Baş: 273 | Tepe: 273)"
+    },
+    "triangles": {
+      "current": 4418,
+      "initial": 4418,
+      "peak": 4418,
+      "formatted": "4.418 (Baş: 4.418 | Tepe: 4.418)"
+    },
+    "sceneObjects": {
+      "current": 2011,
+      "initial": 2011,
+      "peak": 2011,
+      "formatted": "2.011 (Baş: 2.011 | Tepe: 2.011)"
+    },
+    "domNodes": {
+      "current": 131,
+      "initial": 131,
+      "peak": 131,
+      "formatted": "131 (Baş: 131 | Tepe: 131)"
+    },
+    "particles": {
+      "current": 0,
+      "initial": 0,
+      "peak": 0,
+      "formatted": "0 (Baş: 0 | Tepe: 0)"
+    }
+  },
+  "finalSnapshot": {
+    "geometries": {
+      "current": 345,
+      "initial": 252,
+      "peak": 345,
+      "formatted": "345 (Baş: 252 | Tepe: 345)"
+    },
+    "textures": {
+      "current": 4,
+      "initial": 3,
+      "peak": 4,
+      "formatted": "4 (Baş: 3 | Tepe: 4)"
+    },
+    "calls": {
+      "current": 273,
+      "initial": 273,
+      "peak": 275,
+      "formatted": "273 (Baş: 273 | Tepe: 275)"
+    },
+    "triangles": {
+      "current": 4418,
+      "initial": 4418,
+      "peak": 4442,
+      "formatted": "4.418 (Baş: 4.418 | Tepe: 4.442)"
+    },
+    "sceneObjects": {
+      "current": 2011,
+      "initial": 2011,
+      "peak": 2029,
+      "formatted": "2.011 (Baş: 2.011 | Tepe: 2.029)"
+    },
+    "domNodes": {
+      "current": 131,
+      "initial": 131,
+      "peak": 131,
+      "formatted": "131 (Baş: 131 | Tepe: 131)"
+    },
+    "particles": {
+      "current": 0,
+      "initial": 0,
+      "peak": 0,
+      "formatted": "0 (Baş: 0 | Tepe: 0)"
+    }
+  },
+  "timeline": [
+    {
+      "timeSec": 0,
+      "snapshot": {
+        "geometries": {
+          "current": 252,
+          "initial": 252,
+          "peak": 252,
+          "formatted": "252 (Baş: 252 | Tepe: 252)"
+        },
+        "textures": {
+          "current": 3,
+          "initial": 3,
+          "peak": 3,
+          "formatted": "3 (Baş: 3 | Tepe: 3)"
+        },
+        "calls": {
+          "current": 273,
+          "initial": 273,
+          "peak": 273,
+          "formatted": "273 (Baş: 273 | Tepe: 273)"
+        },
+        "triangles": {
+          "current": 4418,
+          "initial": 4418,
+          "peak": 4418,
+          "formatted": "4.418 (Baş: 4.418 | Tepe: 4.418)"
+        },
+        "sceneObjects": {
+          "current": 2011,
+          "initial": 2011,
+          "peak": 2011,
+          "formatted": "2.011 (Baş: 2.011 | Tepe: 2.011)"
+        },
+        "domNodes": {
+          "current": 131,
+          "initial": 131,
+          "peak": 131,
+          "formatted": "131 (Baş: 131 | Tepe: 131)"
+        },
+        "particles": {
+          "current": 0,
+          "initial": 0,
+          "peak": 0,
+          "formatted": "0 (Baş: 0 | Tepe: 0)"
+        }
+      }
+    },
+    {
+      "timeSec": 30,
+      "snapshot": {
+        "geometries": {
+          "current": 262,
+          "initial": 252,
+          "peak": 262,
+          "formatted": "262 (Baş: 252 | Tepe: 262)"
+        },
+        "textures": {
+          "current": 4,
+          "initial": 3,
+          "peak": 4,
+          "formatted": "4 (Baş: 3 | Tepe: 4)"
+        },
+        "calls": {
+          "current": 273,
+          "initial": 273,
+          "peak": 274,
+          "formatted": "273 (Baş: 273 | Tepe: 274)"
+        },
+        "triangles": {
+          "current": 4418,
+          "initial": 4418,
+          "peak": 4430,
+          "formatted": "4.418 (Baş: 4.418 | Tepe: 4.430)"
+        },
+        "sceneObjects": {
+          "current": 2011,
+          "initial": 2011,
+          "peak": 2028,
+          "formatted": "2.011 (Baş: 2.011 | Tepe: 2.028)"
+        },
+        "domNodes": {
+          "current": 131,
+          "initial": 131,
+          "peak": 131,
+          "formatted": "131 (Baş: 131 | Tepe: 131)"
+        },
+        "particles": {
+          "current": 0,
+          "initial": 0,
+          "peak": 0,
+          "formatted": "0 (Baş: 0 | Tepe: 0)"
+        }
+      }
+    },
+    {
+      "timeSec": 60,
+      "snapshot": {
+        "geometries": {
+          "current": 273,
+          "initial": 252,
+          "peak": 273,
+          "formatted": "273 (Baş: 252 | Tepe: 273)"
+        },
+        "textures": {
+          "current": 4,
+          "initial": 3,
+          "peak": 4,
+          "formatted": "4 (Baş: 3 | Tepe: 4)"
+        },
+        "calls": {
+          "current": 273,
+          "initial": 273,
+          "peak": 274,
+          "formatted": "273 (Baş: 273 | Tepe: 274)"
+        },
+        "triangles": {
+          "current": 4418,
+          "initial": 4418,
+          "peak": 4430,
+          "formatted": "4.418 (Baş: 4.418 | Tepe: 4.430)"
+        },
+        "sceneObjects": {
+          "current": 2011,
+          "initial": 2011,
+          "peak": 2029,
+          "formatted": "2.011 (Baş: 2.011 | Tepe: 2.029)"
+        },
+        "domNodes": {
+          "current": 131,
+          "initial": 131,
+          "peak": 131,
+          "formatted": "131 (Baş: 131 | Tepe: 131)"
+        },
+        "particles": {
+          "current": 0,
+          "initial": 0,
+          "peak": 0,
+          "formatted": "0 (Baş: 0 | Tepe: 0)"
+        }
+      }
+    },
+    {
+      "timeSec": 90,
+      "snapshot": {
+        "geometries": {
+          "current": 281,
+          "initial": 252,
+          "peak": 281,
+          "formatted": "281 (Baş: 252 | Tepe: 281)"
+        },
+        "textures": {
+          "current": 4,
+          "initial": 3,
+          "peak": 4,
+          "formatted": "4 (Baş: 3 | Tepe: 4)"
+        },
+        "calls": {
+          "current": 273,
+          "initial": 273,
+          "peak": 274,
+          "formatted": "273 (Baş: 273 | Tepe: 274)"
+        },
+        "triangles": {
+          "current": 4418,
+          "initial": 4418,
+          "peak": 4430,
+          "formatted": "4.418 (Baş: 4.418 | Tepe: 4.430)"
+        },
+        "sceneObjects": {
+          "current": 2011,
+          "initial": 2011,
+          "peak": 2029,
+          "formatted": "2.011 (Baş: 2.011 | Tepe: 2.029)"
+        },
+        "domNodes": {
+          "current": 131,
+          "initial": 131,
+          "peak": 131,
+          "formatted": "131 (Baş: 131 | Tepe: 131)"
+        },
+        "particles": {
+          "current": 0,
+          "initial": 0,
+          "peak": 0,
+          "formatted": "0 (Baş: 0 | Tepe: 0)"
+        }
+      }
+    },
+    {
+      "timeSec": 120,
+      "snapshot": {
+        "geometries": {
+          "current": 289,
+          "initial": 252,
+          "peak": 289,
+          "formatted": "289 (Baş: 252 | Tepe: 289)"
+        },
+        "textures": {
+          "current": 4,
+          "initial": 3,
+          "peak": 4,
+          "formatted": "4 (Baş: 3 | Tepe: 4)"
+        },
+        "calls": {
+          "current": 273,
+          "initial": 273,
+          "peak": 274,
+          "formatted": "273 (Baş: 273 | Tepe: 274)"
+        },
+        "triangles": {
+          "current": 4418,
+          "initial": 4418,
+          "peak": 4430,
+          "formatted": "4.418 (Baş: 4.418 | Tepe: 4.430)"
+        },
+        "sceneObjects": {
+          "current": 2029,
+          "initial": 2011,
+          "peak": 2029,
+          "formatted": "2.029 (Baş: 2.011 | Tepe: 2.029)"
+        },
+        "domNodes": {
+          "current": 131,
+          "initial": 131,
+          "peak": 131,
+          "formatted": "131 (Baş: 131 | Tepe: 131)"
+        },
+        "particles": {
+          "current": 0,
+          "initial": 0,
+          "peak": 0,
+          "formatted": "0 (Baş: 0 | Tepe: 0)"
+        }
+      }
+    },
+    {
+      "timeSec": 150,
+      "snapshot": {
+        "geometries": {
+          "current": 300,
+          "initial": 252,
+          "peak": 300,
+          "formatted": "300 (Baş: 252 | Tepe: 300)"
+        },
+        "textures": {
+          "current": 4,
+          "initial": 3,
+          "peak": 4,
+          "formatted": "4 (Baş: 3 | Tepe: 4)"
+        },
+        "calls": {
+          "current": 273,
+          "initial": 273,
+          "peak": 274,
+          "formatted": "273 (Baş: 273 | Tepe: 274)"
+        },
+        "triangles": {
+          "current": 4418,
+          "initial": 4418,
+          "peak": 4430,
+          "formatted": "4.418 (Baş: 4.418 | Tepe: 4.430)"
+        },
+        "sceneObjects": {
+          "current": 2011,
+          "initial": 2011,
+          "peak": 2029,
+          "formatted": "2.011 (Baş: 2.011 | Tepe: 2.029)"
+        },
+        "domNodes": {
+          "current": 131,
+          "initial": 131,
+          "peak": 131,
+          "formatted": "131 (Baş: 131 | Tepe: 131)"
+        },
+        "particles": {
+          "current": 0,
+          "initial": 0,
+          "peak": 0,
+          "formatted": "0 (Baş: 0 | Tepe: 0)"
+        }
+      }
+    },
+    {
+      "timeSec": 180,
+      "snapshot": {
+        "geometries": {
+          "current": 308,
+          "initial": 252,
+          "peak": 308,
+          "formatted": "308 (Baş: 252 | Tepe: 308)"
+        },
+        "textures": {
+          "current": 4,
+          "initial": 3,
+          "peak": 4,
+          "formatted": "4 (Baş: 3 | Tepe: 4)"
+        },
+        "calls": {
+          "current": 273,
+          "initial": 273,
+          "peak": 274,
+          "formatted": "273 (Baş: 273 | Tepe: 274)"
+        },
+        "triangles": {
+          "current": 4418,
+          "initial": 4418,
+          "peak": 4430,
+          "formatted": "4.418 (Baş: 4.418 | Tepe: 4.430)"
+        },
+        "sceneObjects": {
+          "current": 2028,
+          "initial": 2011,
+          "peak": 2029,
+          "formatted": "2.028 (Baş: 2.011 | Tepe: 2.029)"
+        },
+        "domNodes": {
+          "current": 131,
+          "initial": 131,
+          "peak": 131,
+          "formatted": "131 (Baş: 131 | Tepe: 131)"
+        },
+        "particles": {
+          "current": 0,
+          "initial": 0,
+          "peak": 0,
+          "formatted": "0 (Baş: 0 | Tepe: 0)"
+        }
+      }
+    },
+    {
+      "timeSec": 210,
+      "snapshot": {
+        "geometries": {
+          "current": 319,
+          "initial": 252,
+          "peak": 319,
+          "formatted": "319 (Baş: 252 | Tepe: 319)"
+        },
+        "textures": {
+          "current": 4,
+          "initial": 3,
+          "peak": 4,
+          "formatted": "4 (Baş: 3 | Tepe: 4)"
+        },
+        "calls": {
+          "current": 273,
+          "initial": 273,
+          "peak": 275,
+          "formatted": "273 (Baş: 273 | Tepe: 275)"
+        },
+        "triangles": {
+          "current": 4418,
+          "initial": 4418,
+          "peak": 4442,
+          "formatted": "4.418 (Baş: 4.418 | Tepe: 4.442)"
+        },
+        "sceneObjects": {
+          "current": 2011,
+          "initial": 2011,
+          "peak": 2029,
+          "formatted": "2.011 (Baş: 2.011 | Tepe: 2.029)"
+        },
+        "domNodes": {
+          "current": 131,
+          "initial": 131,
+          "peak": 131,
+          "formatted": "131 (Baş: 131 | Tepe: 131)"
+        },
+        "particles": {
+          "current": 0,
+          "initial": 0,
+          "peak": 0,
+          "formatted": "0 (Baş: 0 | Tepe: 0)"
+        }
+      }
+    },
+    {
+      "timeSec": 240,
+      "snapshot": {
+        "geometries": {
+          "current": 327,
+          "initial": 252,
+          "peak": 327,
+          "formatted": "327 (Baş: 252 | Tepe: 327)"
+        },
+        "textures": {
+          "current": 4,
+          "initial": 3,
+          "peak": 4,
+          "formatted": "4 (Baş: 3 | Tepe: 4)"
+        },
+        "calls": {
+          "current": 273,
+          "initial": 273,
+          "peak": 275,
+          "formatted": "273 (Baş: 273 | Tepe: 275)"
+        },
+        "triangles": {
+          "current": 4418,
+          "initial": 4418,
+          "peak": 4442,
+          "formatted": "4.418 (Baş: 4.418 | Tepe: 4.442)"
+        },
+        "sceneObjects": {
+          "current": 2011,
+          "initial": 2011,
+          "peak": 2029,
+          "formatted": "2.011 (Baş: 2.011 | Tepe: 2.029)"
+        },
+        "domNodes": {
+          "current": 131,
+          "initial": 131,
+          "peak": 131,
+          "formatted": "131 (Baş: 131 | Tepe: 131)"
+        },
+        "particles": {
+          "current": 0,
+          "initial": 0,
+          "peak": 0,
+          "formatted": "0 (Baş: 0 | Tepe: 0)"
+        }
+      }
+    },
+    {
+      "timeSec": 270,
+      "snapshot": {
+        "geometries": {
+          "current": 337,
+          "initial": 252,
+          "peak": 337,
+          "formatted": "337 (Baş: 252 | Tepe: 337)"
+        },
+        "textures": {
+          "current": 4,
+          "initial": 3,
+          "peak": 4,
+          "formatted": "4 (Baş: 3 | Tepe: 4)"
+        },
+        "calls": {
+          "current": 273,
+          "initial": 273,
+          "peak": 275,
+          "formatted": "273 (Baş: 273 | Tepe: 275)"
+        },
+        "triangles": {
+          "current": 4418,
+          "initial": 4418,
+          "peak": 4442,
+          "formatted": "4.418 (Baş: 4.418 | Tepe: 4.442)"
+        },
+        "sceneObjects": {
+          "current": 2011,
+          "initial": 2011,
+          "peak": 2029,
+          "formatted": "2.011 (Baş: 2.011 | Tepe: 2.029)"
+        },
+        "domNodes": {
+          "current": 131,
+          "initial": 131,
+          "peak": 131,
+          "formatted": "131 (Baş: 131 | Tepe: 131)"
+        },
+        "particles": {
+          "current": 0,
+          "initial": 0,
+          "peak": 0,
+          "formatted": "0 (Baş: 0 | Tepe: 0)"
+        }
+      }
+    },
+    {
+      "timeSec": 300,
+      "snapshot": {
+        "geometries": {
+          "current": 345,
+          "initial": 252,
+          "peak": 345,
+          "formatted": "345 (Baş: 252 | Tepe: 345)"
+        },
+        "textures": {
+          "current": 4,
+          "initial": 3,
+          "peak": 4,
+          "formatted": "4 (Baş: 3 | Tepe: 4)"
+        },
+        "calls": {
+          "current": 273,
+          "initial": 273,
+          "peak": 275,
+          "formatted": "273 (Baş: 273 | Tepe: 275)"
+        },
+        "triangles": {
+          "current": 4418,
+          "initial": 4418,
+          "peak": 4442,
+          "formatted": "4.418 (Baş: 4.418 | Tepe: 4.442)"
+        },
+        "sceneObjects": {
+          "current": 2011,
+          "initial": 2011,
+          "peak": 2029,
+          "formatted": "2.011 (Baş: 2.011 | Tepe: 2.029)"
+        },
+        "domNodes": {
+          "current": 131,
+          "initial": 131,
+          "peak": 131,
+          "formatted": "131 (Baş: 131 | Tepe: 131)"
+        },
+        "particles": {
+          "current": 0,
+          "initial": 0,
+          "peak": 0,
+          "formatted": "0 (Baş: 0 | Tepe: 0)"
+        }
+      }
+    }
+  ],
+  "results": {
+    "test1": "GEÇTİ",
+    "test2": "GEÇTİ",
+    "test3": "GEÇTİ",
+    "test4": "GEÇTİ",
+    "test5": "KALDI: Bellek sızıntısı tespit edildi! Geo +93, Doku +1, DOM +0"
+  }
+}
